@@ -273,7 +273,7 @@ const ContactList: React.FC = () => {
                     <Box
                       sx={{ display: "flex", justifyContent: "center", gap: 1 }}
                     >
-                      <IconButton
+                      {/* <IconButton
                         size="small"
                         sx={{
                           color: "primary.main",
@@ -281,7 +281,7 @@ const ContactList: React.FC = () => {
                         }}
                       >
                         <Edit fontSize="small" />
-                      </IconButton>
+                      </IconButton> */}
                       <IconButton
                         size="small"
                         onClick={() => deleteContact(contact.id)}
