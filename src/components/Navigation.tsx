@@ -2,10 +2,6 @@ import React from 'react';
 import { Button, Box, useMediaQuery, useTheme } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 
-/**
- * Responsive navigation component
- * Adapts to mobile screens with different layout
- */
 const Navigation: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));

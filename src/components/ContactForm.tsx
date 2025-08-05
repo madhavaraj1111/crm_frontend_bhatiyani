@@ -1,50 +1,32 @@
 import React, { useState } from 'react';
 import { Paper, TextField, Button, Grid, Typography } from '@mui/material';
-import axios from 'axios';
+import useContactStore from '../store/useContactStore';
 
-interface ContactFormProps {
-  onContactAdded: () => void;
-}
-
-const ContactForm: React.FC<ContactFormProps> = ({ onContactAdded }) => {
-  const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', company: ''
-  });
+const ContactForm: React.FC = () => {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '' });
+  const { addContact } = useContactStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await axios.post('http://localhost:3001/contacts', formData);
-      setFormData({ name: '', email: '', phone: '', company: '' });
-      onContactAdded();
-    } catch (error) {
-      console.error('Error adding contact:', error);
-    }
+    await addContact(form);
+    setForm({ name: '', email: '', phone: '', company: '' });
   };
 
   return (
-    <Paper sx={{ p: 2 }}>
-      <Typography variant="h6" gutterBottom>Add Contact</Typography>
+    <Paper sx={{ p: 2, mb: 2 }}>
+      <Typography variant="h6">Add Contact</Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Name" value={formData.name} 
-              onChange={(e) => setFormData({...formData, name: e.target.value})} required />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Email" value={formData.email} 
-              onChange={(e) => setFormData({...formData, email: e.target.value})} required />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Phone" value={formData.phone} 
-              onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Company" value={formData.company} 
-              onChange={(e) => setFormData({...formData, company: e.target.value})} />
-          </Grid>
+          {['name', 'email', 'phone', 'company'].map((field) => (
+            <Grid item xs={12} sm={6} key={field}>
+              <TextField fullWidth label={field} value={(form as any)[field]}
+                onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                required={field === 'name' || field === 'email'}
+              />
+            </Grid>
+          ))}
           <Grid item xs={12}>
-            <Button type="submit" variant="contained">Add Contact</Button>
+            <Button type="submit" variant="contained">Add</Button>
           </Grid>
         </Grid>
       </form>
