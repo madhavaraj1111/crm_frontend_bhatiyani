@@ -1,45 +1,45 @@
+// src/store/useContactStore.ts
 import { create } from 'zustand';
-import axios from 'axios';
-import type { Contact } from '../types/contact';
-
+import api from '../api/axios';
+import type { Contact,ContactInput } from '../types/contact';
 
 interface ContactState {
   contacts: Contact[];
   fetchContacts: () => void;
-  addContact: (contact: Omit<Contact, 'id'>) => Promise<void>;
+  addContact: (contact: ContactInput) => Promise<void>;
   deleteContact: (id: number) => Promise<void>;
 }
 
 const useContactStore = create<ContactState>((set) => ({
   contacts: [],
+  
   fetchContacts: async () => {
     try {
-      const res = await axios.get('http://localhost:3001/contacts');
+      const res = await api.get<Contact[]>('/contacts');
       set({ contacts: res.data });
     } catch (err) {
-      console.error('Fetch error:', err);
+      console.error('Fetch contacts error:', err);
     }
   },
+
   addContact: async (contact) => {
     try {
-      await axios.post('http://localhost:3001/contacts', {
-        ...contact,
-        createdAt: new Date().toISOString(),
-      });
-      const res = await axios.get('http://localhost:3001/contacts');
+      await api.post('/contacts', contact);
+      const res = await api.get<Contact[]>('/contacts');
       set({ contacts: res.data });
     } catch (err) {
-      console.error('Add error:', err);
+      console.error('Add contact error:', err);
     }
   },
+
   deleteContact: async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/contacts/${id}`);
+      await api.delete(`/contacts/${id}`);
       set((state) => ({
         contacts: state.contacts.filter((c) => c.id !== id),
       }));
     } catch (err) {
-      console.error('Delete error:', err);
+      console.error('Delete contact error:', err);
     }
   },
 }));
