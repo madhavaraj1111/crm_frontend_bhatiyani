@@ -1,5 +1,42 @@
 {
   "contacts": [
-    {"id": 1, "name": "John Doe", "email": "john@example.com", "phone": "123-456-7890", "company": "Tech Corp"}
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@techcorp.com",
+      "phone": "+1-555-0123",
+      "company": "TechCorp Solutions",
+      "createdAt": "2024-08-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@innovate.com",
+      "phone": "+1-555-0124",
+      "company": "Innovate Inc",
+      "createdAt": "2024-08-02T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Bob Johnson",
+      "email": "bob.johnson@startup.io",
+      "phone": "+1-555-0125",
+      "company": "Startup.io",
+      "createdAt": "2024-08-03T09:15:00Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "name": "TechCorp Solutions",
+      "industry": "Technology",
+      "employees": 150
+    },
+    {
+      "id": 2,
+      "name": "Innovate Inc",
+      "industry": "Finance",
+      "employees": 75
+    }
   ]
 }
