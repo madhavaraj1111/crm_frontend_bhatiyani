@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
-import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import { Bar, Doughnut} from 'react-chartjs-2';
 import useContactStore from '../store/useContactStore';
 import { 
  Typography, Paper, Box, Card, CardContent, Chip, Avatar,

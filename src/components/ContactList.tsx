@@ -21,13 +21,11 @@ import {
 } from "@mui/material";
 import {
   Delete,
-  Edit,
   Person,
   Email,
   Phone,
   Business,
   Search,
-  FilterList,
   Add,
 } from "@mui/icons-material";
 import useContactStore from "../store/useContactStore";
@@ -58,7 +56,7 @@ const ContactList: React.FC = () => {
     page * rowsPerPage + rowsPerPage
   );
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 
